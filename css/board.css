@@ -1,0 +1,168 @@
+@charset "EUC-KR";
+/* 기본 스타일 */
+body {
+	font-family: 'Noto Sans KR', sans-serif;
+	line-height: 1.6;
+	color: #333;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* 헤더 */
+header {
+	background-color: #004483;
+	color: white;
+	padding: 5px;
+	display: flex;
+	justify-content: center ;
+	align-items: center;
+}
+
+header>h1 {
+	font-size: 24px;
+	color: white;
+	/*margin-bottom: 20px;*/
+}
+
+/* #004483; */
+
+/*
+header nav a {
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+header nav a.active {
+    border-bottom: 2px solid white;
+}
+
+header form input {
+    padding: 8px;
+    border: none;
+}
+
+header form button {
+    padding: 8px 15px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+*/
+
+/* 메인 콘텐츠 */
+main {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: white;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/*
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+*/
+
+/* 게시판 헤더 */
+.board-header .categories {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.board-header .categories li a {
+	padding: 10px 20px;
+	display: block;
+}
+
+.board-header .categories li a.active {
+	background-color: #4a90e2;
+	color: white;
+}
+
+/* 게시판 테이블 */
+.board-list {
+	display:table;
+	width: 95%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+.board-list th, .board-list td {
+	padding: 12px;
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.board-list th {
+	background-color: #f9f9f9;
+	font-weight: bold;
+}
+
+.board-list tr:nth-child(even) {
+	background-color: #f9f9f9;
+}
+
+.board-list tr:hover {
+	background-color: #f0f0f0;
+}
+
+.board-list .title {
+	text-align: left;
+}
+
+.board-list .category {
+	color: #4a90e2;
+	font-weight: 500;
+}
+
+/* 게시판 푸터 */
+.board-footer {
+	display: flex;
+	justify-content: center ;
+	align-items: center ;
+	text-align : right ;
+	margin-top: 20px;
+}
+
+/* style="background-color: blue; color: white; padding: 10px 20px; text-decoration: none;"*/
+
+.pagination a {
+	background-color: blue;
+	color: white; 
+	padding: 8px 12px;
+	border: 1px solid #e5e5e5;
+	text-align: left;
+	margin: 0 2px;
+}
+
+.pagination a.active {
+	background-color: #4a90e2;
+	color: white;
+}
+
+.btn-write {
+	padding: 10px 20px;
+	background-color: #4a90e2;
+	color: white;
+	border: none;
+	text-align : right ;
+}
+
+/* 푸터 */
+footer {
+	text-align: right;
+	padding: 20px;
+	background-color: #004483;
+	color: white;
+}

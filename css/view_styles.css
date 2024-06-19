@@ -1,0 +1,151 @@
+@charset "EUC-KR";
+
+body {
+	font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+	}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+/* Çì´õ */
+header {
+	background-color: #004483;
+	color: white;
+	padding: 5px;
+	display: flex;
+	justify-content: center ;
+	align-items: center;
+}
+
+header>h1 {
+	font-size: 24px;
+	color: white;
+	/*margin-bottom: 20px;*/
+}
+.container {
+	width: 95%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.1);
+	}
+
+h1 {
+	color: #333;
+    /* border-bottom: 1px solid #ddd; */
+    padding-bottom: 10px;
+    }
+  
+.title {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 10px;
+	background-color: #f0f0f0 ;
+	padding: 20px ;
+	}
+	
+.content {
+	margin: 20px 0;
+	line-height: 1.6;
+	margin-bottom: 10px;
+	background-color: white ;
+	padding: 20px ;
+	}
+
+.board-footer {
+	display: flex;
+	justify-content: center ;
+	align-items: center ;
+	text-align : right ;
+	margin-top: 20px;
+}
+.back-link {
+	padding: 10px 20px;
+	background-color: #4a90e2;
+	color: white;
+	border: none;
+	text-align : right ;
+	}
+	
+.notice-info {
+	font-size: 0.6em;
+	color: #666;
+	margin-bottom: 10px;
+	text-align: right ;
+	}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+	}
+
+th, td {
+    border: 1px solid #ddd;
+	padding: 8px;
+	}
+	
+th {
+    background-color: #4CAF50;
+    color: white;
+	}
+	
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+	}
+
+.edit-button, .delete-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.edit-button {
+    background-color:  #4a90e2; /* #4caf50;  Green */
+}
+
+.edit-button:hover {
+    background-color: #45a049;
+}
+
+.delete-button {
+    background-color:  #4a90e2 ; /* #f44336; Red */
+}
+
+.delete-button:hover {
+    background-color: #da190b;
+}
+@media screen and (max-width: 600px) {
+    table, th, td {
+        width: 100%;
+        display: block;
+    }
+    th, td {
+        border: none;
+    }
+    tr {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+    th {
+        display: none;
+    }
+    td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: inline-block;
+        width: 100%;
+        background-color: #f2f2f2;
+    }
+}
+
