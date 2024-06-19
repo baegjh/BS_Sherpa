@@ -1,0 +1,603 @@
+
+<!DOCTYPE html>
+
+<html lang="ko">
+        <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d7ce2b901ed6c206df168689da3537e1"></script>
+        <script type="module" src="./routes.js"></script>
+          <script type="module" src="./navigation.js"></script>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d7ce2b901ed6c206df168689da3537e1"></script>
+          <style>
+              .dot {overflow:hidden;float:left;width:12px;height:12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');}    
+              .dotOverlay {position:relative;bottom:10px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;font-size:12px;padding:5px;background:#fff;}
+              .dotOverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
+              .number {font-weight:bold;color:#ee6152;}
+              .dotOverlay:after {content:'';position:absolute;margin-left:-6px;left:50%;bottom:-8px;width:11px;height:8px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')}
+              .distanceInfo {position:relative;top:5px;left:5px;list-style:none;margin:0;}
+              .distanceInfo .label {display:inline-block;width:50px;}
+              .distanceInfo:after {content:none;}
+              #map {
+                  width: 100%;
+                  height: 500px;
+              }
+        </style>  
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                <meta name="viewport" content="width=device-width">
+                <title> 본부동 건물안내 </title>
+
+                
+                <meta name="google-site-verification"content="GVbFketvhXi4ISO1LZn4wLzV9FLazRvelb2EONnuexc">
+                <meta name="naver-site-verification" content="157e445612765450b1570418afe4e386fe66abe3">
+                <meta name="next-head-count" content="10">
+                <link rel="preload" href="./javatest/401c54fda96c0643.css" as="style">
+                <link rel="stylesheet" href="./javatest/401c54fda96c0643.css" data-n-g="">
+                <link rel="stylesheet" href="convmap.css">
+                
+                <noscript data-n-css="">
+
+                </noscript>
+       
+    <body>
+        <div id="__next">
+        <div class="flex min-h-screen flex-col">
+                <header class="w-full bg-base-200 text-base-content">
+                        <nav class="container navbar m-auto justify-between">
+                        <div class="flex-none">
+                                <div class="logo">
+                                        <img src="images/bulogo.png" style="width: 100%; height: 50px" alt="백석대학교 로고">
+                                      </div>
+                        </div>
+                        <div class="hidden flex-1 sm:flex">
+                                <ul class="menu menu-horizontal gap-1 text-base">
+            
+                                        <li><a class="" href="#target-section1">길찾기</a></li>
+                                        <li><a class="" href="#target-section">편의시설 안내</a></li>
+                                        <li><a class="" href="notice/notice_list.jsp">공지사항</a></li>
+                                    </ul>
+                        </div>
+                        </nav>
+                </header>
+                
+                <main class="min-h-screen">
+                   
+
+                        <div class="container m-auto flex-1 px-4 py-8">
+                                <div class="flex flex-col gap-8">
+                                        <div class="flex flex-col gap-8 md:flex-row">
+                                <div class="flex flex-1 flex-col gap-8">
+                                <div>
+                                        <div class="mb-4 flex justify-between"><h2 class="subtitle">건물 안내</h2>
+                                                <a class="link">      
+                                                 <select id="building" onchange="goToLink(this.value)">
+  <option value="">다른 건물을 찾으시나요?</option>
+  <option value="bokji.html">학생복지관</option>
+  <option value="bonbu.html">본부동</option>
+  <option value="jinli.html">진리관</option>
+  <option value="BUhole.html">백석홀</option>
+  <option value="library.html">도서관</option>
+  <option value="hGYM.html">체육관</option>
+  <option value="jinli.html">창조관</option>
+</select>
+
+<script>
+  function goToLink(url) {
+    if (url !== "") {
+      window.location.href = url;
+    }
+  }
+</script></a>
+                                         </div>
+                                        <div class="gap-4 lg:grid-cols-2 xl:grid-cols-3">
+                                                <div class="w-full rounded-lg bg-base-200 p-4 text-base-content shadow">
+                                                       
+                                                        <div class="flex justify-between">
+                                                <div class="mb-4 flex gap-1 text-xs">
+                                                        <span style= "font-weight: bold;">현재 위치하신 건물은 백석홀입니다.</span>
+                                                        <span >|</span><span style= "font-weight: bold;">건물 상세 정보</span>
+                                                </div>
+                                                </div>
+                                        <div class="flex gap-3">
+                                        <div class="flex flex-1 flex-col gap-2">
+                                        <div class="flex items-center justify-between">
+                                                <div class="flex items-center gap-2">
+                                                        <p class="text-sm"></p>
+                                                </div>
+                                                </div>
+                                                <div class="flex items-center justify-between">
+                                                        <div class="flex items-center gap-2">
+                                                        <p style= "font-weight: bold;">편의시설 안내
+                                                                
+                                                        </p>
+                                                        <h5></h5>
+                                                        <p style= "font-weight: bold;">본 건물에는 편의시설이 없습니다.</p>
+                                                  
+                                                        
+                                                        </div>
+                                                        
+                                                </div>
+                                               <!--  <div class="flex items-center gap-2">
+                                                        <p class="text-sm">담당 부서
+                                                                
+                                                        </p>
+                                                        <h5>전산정보원</h5>
+                                                        <p></p>
+                                                  
+                                                        
+                                                        <h5>연락처</h5>
+                                                        <p>041-550-0495</p></div>
+                                                        
+                                                </div> -->
+                                        </div>
+                                        <div class="border-l-2"></div>
+                                        <div class="flex flex-col justify-center gap-2 ">
+                                                <a class="btn btn-outline btn-sm" href="#target-section">다른 편의시설 찾기</a></div>
+                                        </div>
+                                </div>
+
+                                                <div class="border-l-2"></div>
+                                                <div class="flex flex-col justify-center gap-2 ">
+                                                        <a class="btn btn-outline btn-sm" href="notice/notice_list.jsp">공지사항 게시판</a>
+                                                </div>
+                                     
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <div>
+                        <div class="mb-4 flex justify-between">
+                        <div id="target-section1" class="subtitle">길 안내 지도</div>
+                                                                                                                                     
+                              
+                                                             
+                                                </div>
+     <div class="grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+     <div class="flex h-[500px] flex-col gap-2 rounded-lg bg-base-200 p-6 text-base-content">
+                                                               
+    <section class="info-sections">
+      <div class="location-info">
+        <p>현재 위치: 
+          <select id="start">
+            <option value="백석홀">백석홀</option>
+            <option value="백석대정문">백석대정문</option>
+            <option value="학생복지관">학생복지관</option>
+            <option value="본부동">본부동</option>
+            <option value="진리관">진리관</option>
+            
+            <option value="도서관">도서관</option>
+            <option value="체육관">체육관</option>
+            <option value="창조관">창조관</option>
+          </select>
+        </p>
+        
+        <h3>목적지: 
+            <select id="end">
+              <option value="백석대정문">백석대정문</option>
+              <option value="학생복지관">학생복지관</option>
+              <option value="본부동">본부동</option>
+              <option value="진리관">진리관</option>
+              <option value="백석홀">백석홀</option>
+              <option value="도서관">도서관</option>
+              <option value="체육관">체육관</option>
+              <option value="창조관">창조관</option>
+            </select>
+         </h3>
+         
+           <button onclick="drawPath(document.querySelector('#start').value, document.querySelector('#end').value)"> <div class="border-l-2"></div>
+    <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >경로 안내</a>
+    </div></button>
+          
+        <div id="map"></div>
+
+    <script type="module">
+        // import { routes, drawPath } from "./routes.js" ;
+        import { routes } from "./routes.js" ;
+        import { drawPath } from "./navigation.js" ;
+
+        var map, polyline;
+    
+        const x = 36.8393 ;  // 36.83928220573199 ;
+        const y = 127.185 ;  // 127.1859038216635 ;
+        var mapContainer = document.getElementById("map");
+        var mapOption = {
+            center: new kakao.maps.LatLng(x, y),
+            level: 3
+        };
+
+        map = new kakao.maps.Map(mapContainer, mapOption);
+       
+        polyline = new kakao.maps.Polyline({
+            map: map,
+            path: [],
+            strokeWeight: 5,
+            strokeColor: '#000000',  // '#db4040',
+            strokeOpacity: 1,
+            strokeStyle: 'shortdash'
+        });
+
+        document.querySelector('button').addEventListener('click', function() {
+            var startPlace = document.querySelector('#start').value;
+            var endPlace = document.querySelector('#end').value;
+            drawPath(startPlace, endPlace, routes, map, polyline);
+        });
+
+    </script>
+  
+     </div>
+    </section>
+    
+                                                                </div>
+                                                      
+                                                                                </div>
+                                                                        </div>
+                 <div>
+                                                                                                <div class="mb-4 flex justify-between">
+                                                                                                        <div id="target-section" class="subtitle">편의시설 안내</div>
+                                                                                                                                     
+                                                                                                                        </div>
+                                                                                                                        <div class="grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                                                                                                                         <div class="flex h-[500px] flex-col gap-2 rounded-lg bg-base-200 p-6 text-base-content">
+                                                                                                                             
+                                                                            
+      <section class="hero">
+      
+  <div id="convmap" style="width:100%;height:500px;"></div>
+  <p>
+        <button onclick="showCategory('atm')"> 
+        <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >ATM</a>
+    </div></button>
+        <button onclick="showCategory('convenience')"> 
+        <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >편의점</a>
+    </div></button>
+        <button onclick="showCategory('studyroom')"> <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >열람실</a>
+    </div></button>
+        <button onclick="showCategory('cafe')"> <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >카페</a>
+    </div></button>
+        <button onclick="showCategory('restaurant')"> <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >식당</a>
+    </div></button>
+        <button onclick="showCategory('printstore')"> <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >복사/인쇄</a>
+    </div></button>
+        <button onclick="showCategory('bus')"> <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >셔틀버스 발권기</a>
+    </div></button>
+        <button onclick="showCategory('elevator')"> <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >엘리베이터</a>
+    </div></button>
+        <button id="toggleButton" onclick="toggleMarkers()"> <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >마커 표시/숨기기</a>
+    </div></button>
+        <button onclick="setDraggable(false)"> <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >지도 고정하기</a>
+    </div></button>
+        <button onclick="setDraggable(true)"> <div class="flex flex-col justify-center gap-2 ">
+            <a class="btn btn-outline btn-sm" >지도 고정해제</a>
+    </div></button>
+    </p>
+    
+      </section>
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d7ce2b901ed6c206df168689da3537e1"></script>
+      
+      <script>
+          var mapContainer = document.getElementById('convmap'),
+              mapOption = { 
+                  center: new kakao.maps.LatLng(36.83928220573199, 127.18593038216635),
+                  level: 3
+              };
+  
+          var map = new kakao.maps.Map(mapContainer, mapOption);
+  
+          function zoomIn() {
+              map.setLevel(map.getLevel() - 1);
+          }
+  
+          function zoomOut() {
+              map.setLevel(map.getLevel() + 1);
+          }
+  
+          // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+          var positions = [
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>본부동</b>
+                      </div>
+                      <p>-ATM</p>
+                      <p>-복사점</p>
+                      <p>-CU 편의점</p>
+                      <p>-열람실&자료실</p>
+                      <b>이 건물은 엘리베이터가 있습니다.</b>`,
+                  latlng: new kakao.maps.LatLng(36.83928220573199, 127.18593038216635),
+                  category: ['atm','convenience','studyroom','printstore','elevator']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>진리관</b>
+                      </div>
+                      <p>-뷰리서점(교양)</p>
+                      <p>-신한은행</p>
+                      <p>-보건실</p>
+                      <p>-여학생 휴계실</p>
+                      <p>-백향서점(전공)</p>
+                      <p>-우체국</p>
+                      <p>-안경점</p>
+                      <p>-복사점</p>
+                      <p>-ATM</p>
+                      <p>-CU 편의점</p>
+                      <p>-셔틀승차권 판매기</p>
+                      <b>이 건물은 엘리베이터가 없습니다.</b>`, 
+                  latlng: new kakao.maps.LatLng(36.840140431670335 , 127.18453388259906),
+                  category: ['convenience','atm','printstore','bus']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>예술동</b>
+                      </div>
+                      <p>-CU 편의점</p>
+                      <p>-복사점</p>
+                      <b>이 건물은 엘리베이터가 있습니다.<b/> `, 
+                  latlng: new kakao.maps.LatLng(36.83880186929474 , 127.1876809136907),
+                  category: ['convenience','printstore','elevator']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>음악관</b>
+                      </div>
+                      <b>이 건물은 엘리베이터가 없습니다.<b/>`,
+                  latlng: new kakao.maps.LatLng(36.84013926341683 , 127.1852850193877),
+                  category: ['N']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>교수회관</b>
+                      </div><p>-식당/매점</p>
+                      <b>이 건물은 엘리베이터가 없습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.83967145810165 , 127.1847906081929),
+                  category: ['restaurant']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>지혜관</b>
+                      </div>
+                      <p>-스터디룸</p>
+                      <p>-CU 편의점</p>
+                      <b>이 건물은 엘리베이터가 있습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.83867187869849 , 127.18437340288443),
+                  category: ['convenience','studyroom','elevator']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>도서관</b>
+                      </div>
+                      <p>-무인카페</p>
+                      <p>-복사실</p>
+                      <p>-열람실</p>
+                      <p>-세븐일레븐 편의점</p>
+                      <b>이 건물은 엘리베이터가 있습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.83773521864724 , 127.18405725536161),
+                  category: ['cafe','printstore','studyroom','convenience','elevator']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>조형관</b>
+                      </div>
+                      <p>-CU 편의점</p>
+                      <p>-복사점</p>
+                      <p>-열람실</p>
+                      <p>-뷰리카페 조형관점</p>
+                      <b>이 건물은 엘리베이터가 있습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.840873091070456 , 127.18851559956927),
+                  category: ['convenience','printstore','studyroom','cafe','elevator']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>체육관</b>
+                      </div>
+                      <b>이 건물은 엘리베이터가 있습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.84131647400566 , 127.18735072201022),
+                  category: ['elevator']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>백석생활관</b>
+                      </div><p>-휘트니스 센터</p>
+                      <p>-기념품점</p>
+                      <p>-당구장</p>
+                      <p>-식당</p>
+                      <p>-ATM</p>
+                      <p>-인쇄소</p>
+                      <p>-이디야커피</p>
+                      <p>-GS25 편의점</p>
+                      <b>이 건물은 엘리베이터가 있습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.84246422835901 , 127.18521214868666),
+                  category: ['convenience','restaurant','atm','printstore','cafe','elevator']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>목양관</b>
+                      </div>
+                      <p>-복사점</p>
+                      <p>-스터디룸</p>
+                      <p>-휴계실</p>
+                      <b>이 건물은 엘리베이터가 없습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.840862701990915 , 127.18363872637468),
+                  category: ['printstore','studyroom']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>학생복지관</b>
+                      </div>
+                      <p>-식당(밀겨울)</p>
+                      <p>-사진관</p>
+                      <p>-세븐일레븐 편의점</p>
+                      <p>-복사점</p>
+                      <p>-승차권 판매기</p>
+                      <b>이 건물은 엘리베이터가 없습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.840576092973514 , 127.18250571971859),
+                  category: ['bus','restaurant','convenience','printstore']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>백석홀</b>
+                      </div>
+                      <b>이 건물은 엘리베이터가 없습니다.<b/>`, 
+                      latlng: new kakao.maps.LatLng(36.839537383396156, 127.18262657206546),
+                  category: ['N']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>인성관</b>
+                      </div>
+                      <p>증명서 발급기</p>
+                      <b>이 건물은 엘리베이터가 없습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.83938726854455, 127.18355672227312),
+                  category: ['N']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>베데스다 공원</b>
+                      </div>
+                      <p>-뷰리카페 분수대점</p>`, 
+                  latlng: new kakao.maps.LatLng(36.84010999160991, 127.1838247115266),
+                  category: ['cafe']
+              },
+              {
+                  content: `<ul class="dotOverlay distanceinfo">
+                      <b>외식산업관</b>
+                      </div>
+                      <p>-안골식당</p>
+                      <p>-만나베이커리</p>
+                      <b>이 건물은 엘리베이터가 없습니다.<b/>`, 
+                  latlng: new kakao.maps.LatLng(36.83749016273122 , 127.18518894403994),
+                  category: ['restaurant']
+              }
+          ];
+  
+          var markers = {}; // 마커를 담을 객체
+          var infowindows = {}; // 인포윈도우를 담을 객체
+          var markerVisible = true; // 마커가 표시 상태인지 여부를 저장하는 변수
+  
+          // 카테고리별로 초기화
+          var categories = ['atm','N', 'convenience', 'studyroom', 'cafe', 'restaurant','printstore','bus','elevator'];
+          categories.forEach(category => {
+              markers[category] = [];
+              infowindows[category] = [];
+          });
+  
+          // 마커와 인포윈도우 생성 및 카테고리별로 저장
+          for (var i = 0; i < positions.length; i++) {
+              var marker = new kakao.maps.Marker({
+                  position: positions[i].latlng
+              });
+  
+              var infowindow = new kakao.maps.InfoWindow({
+                  content: positions[i].content
+              });
+  
+              // 마커에 카테고리 정보 설정
+              marker.category = positions[i].category;
+  
+  
+              // 각 카테고리에 마커와 인포윈도우 추가
+              positions[i].category.forEach(category => {
+                  markers[category].push(marker);
+                  infowindows[category].push(infowindow);
+              });
+  
+              // 마커에 클릭 이벤트를 등록합니다
+              kakao.maps.event.addListener(marker, 'click', makeClickListener(marker, infowindow));
+  
+              // 초기에는 모든 마커를 지도에 추가합니다
+              marker.setMap(map);
+          }
+  
+          // 마커를 클릭할 때 인포윈도우를 열고 닫는 클로저를 만드는 함수입니다 
+          function makeClickListener(marker, infowindow) {
+              return function() {
+                  if (infowindow.getMap()) {
+                      infowindow.close();
+                  } else {
+                      for (var j = 0; j < categories.length; j++) {
+                          for (var k = 0; k < infowindows[categories[j]].length; k++) {
+                              infowindows[categories[j]][k].close();
+                          }
+                      }
+                      infowindow.open(map, marker);
+                  }
+              };
+          }
+  
+          // 특정 카테고리의 마커만 표시하는 함수입니다
+          function showCategory(category) {
+              for (var i = 0; i < categories.length; i++) {
+                  var cat = categories[i];
+                  for (var j = 0; j < markers[cat].length; j++) {
+                      markers[cat][j].setMap(null);
+                  }
+              }
+  
+              for (var i = 0; i < markers[category].length; i++) {
+                  markers[category][i].setMap(map);
+              }
+          }
+  
+          // 모든 마커를 표시하는 함수입니다
+          function showAllMarkers() {
+              for (var i = 0; i < categories.length; i++) {
+                  var cat = categories[i];
+                  for (var j = 0; j < markers[cat].length; j++) {
+                      markers[cat][j].setMap(map);
+                  }
+              }
+          }
+  
+          // 모든 마커를 숨기거나 표시하고 인포윈도우를 닫는 함수를 정의합니다
+          function toggleMarkers() {
+              for (var i = 0; i < categories.length; i++) {
+                  var cat = categories[i];
+                  for (var j = 0; j < markers[cat].length; j++) {
+                      var marker = markers[cat][j];
+                      if (markerVisible) {
+                          marker.setMap(null); // 마커가 지도에 추가되었으면 지도에서 제거합니다
+                      } else {
+                          marker.setMap(map); // 마커가 지도에 추가되지 않았으면 지도에 추가합니다
+                      }
+  
+                      infowindows[cat][j].close();
+                  }
+              }
+              markerVisible = !markerVisible;
+          }
+  
+          // 지도 드래그 이동을 설정하는 함수입니다
+          function setDraggable(draggable) {
+              map.setDraggable(draggable);
+          }
+      </script>
+  
+      </section>                         
+               
+                </div>
+        </div>
+</div>
+                        </main>
+                        <footer class="bg-base-200 text-base-content"><div class="container mx-auto flex items-center justify-between p-6"><div class="flex flex-col gap-2">
+                                <div class="text-xl">백석대학교 캡스톤 디자인</div>
+                                <div class="text-sm">© 2024-1학기 백석 셰르파 팀. All rights reserved.</div>
+                        <div class="text-sm">Created By <a class="link" target="_black" rel="noopener noreferrer">백석대학교 컴퓨터공학부</a><div>
+
+                        </div>
+                </div>
+        </div>
+</div>
+</footer>
+</div>
+</div>
+      
+</body>
+</html>

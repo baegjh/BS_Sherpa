@@ -1,0 +1,248 @@
+<link rel="stylesheet" href="convmap.css">
+<div id="map" style="width:500px;height:500px;"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d7ce2b901ed6c206df168689da3537e1"></script>
+
+<script>
+var mapContainer = document.getElementById('map'), // 吏��룄瑜� �몴�떆�븷 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng(36.83928220573199 , 127.18593038216635), // 吏��룄�쓽 以묒떖醫뚰몴
+        level: 3 // 吏��룄�쓽 �솗�� �젅踰�
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 吏��룄瑜� �깮�꽦�빀�땲�떎
+
+var mapContainer = document.getElementById('map'), // 吏��룄瑜� �몴�떆�븷 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(36.83928220573199, 127.18593038216635), // 吏��룄�쓽 以묒떖醫뚰몴
+         // draggable: false, // 吏��룄瑜� �깮�꽦�븷�븣 吏��룄 �씠�룞 諛� �솗��/異뺤냼瑜� 留됱쑝�젮硫� draggable: false �샃�뀡�쓣 異붽��븯�꽭�슂
+        level: 3 // 吏��룄�쓽 �솗�� �젅踰�
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 吏��룄瑜� �깮�꽦�빀�땲�떎
+
+// 踰꾪듉 �겢由��뿉 �뵲�씪 吏��룄 �씠�룞 湲곕뒫�쓣 留됯굅�굹 ��怨� �떢�� 寃쎌슦�뿉�뒗 map.setDraggable �븿�닔瑜� �궗�슜�빀�땲�떎
+function setDraggable(draggable) {
+    // 留덉슦�뒪 �뱶�옒洹몃줈 吏��룄 �씠�룞 媛��뒫�뿬遺�瑜� �꽕�젙�빀�땲�떎
+    map.setDraggable(draggable);    
+}
+// 留덉빱瑜� �몴�떆�븷 �쐞移섏� �궡�슜�쓣 媛�吏�怨� �엳�뒗 媛앹껜 諛곗뿴�엯�땲�떎 
+var positions = [
+    {
+        content: `<div style="width:250px">
+            <b>蹂몃��룞</b>
+            </div>
+            <p>-ATM</p>
+            <p>-蹂듭궗�젏</p>
+            <p>-CU �렪�쓽�젏</p>
+            <p>-�뿴�엺�떎&�옄猷뚯떎</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �엳�뒿�땲�떎.</b>`,
+        latlng: new kakao.maps.LatLng(36.83928220573199, 127.18593038216635)
+    },
+
+    {
+        content: `<div style= "width:250px">
+            <b>吏꾨━愿�</b>
+            </div>
+            <p>-酉곕━�꽌�젏(援먯뼇)</p>
+            <p>-�떊�븳���뻾</p>
+            <p>-蹂닿굔�떎</p>
+            <p>-諛깊뼢�꽌�젏(�쟾怨�)</p>
+            <p>-�슦泥닿뎅</p>
+            <p>-蹂듭궗�젏</p>
+            <p>-ATM</p>
+            <p>-CU �렪�쓽�젏</p>
+            <p>-�뀛��踰꾩뒪 �듅李④텒 �뙋留ㅺ린</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �뾾�뒿�땲�떎.</b>`, 
+        latlng: new kakao.maps.LatLng(36.840140431670335 , 127.18453388259906)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>�삁�닠�룞</b>
+            </div>
+            <p>-留ㅼ젏</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �엳�뒿�땲�떎.<b/> `, 
+        latlng: new kakao.maps.LatLng(36.83880186929474 , 127.1876809136907)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>�쓬�븙愿�</b>
+            </div>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �뾾�뒿�땲�떎.<b/>`,
+        latlng: new kakao.maps.LatLng(36.84013926341683 , 127.1852850193877)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>援먯닔�쉶愿�</b>
+            </div>
+            <p>-�떇�떦 / 留ㅼ젏</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �뾾�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.83967145810165 , 127.1847906081929)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>吏��삙愿�</b>
+            </div> 
+            <p>-CU �렪�쓽�젏</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �엳�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.83867187869849 , 127.18437340288443)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>�룄�꽌愿�</b>
+            </div> 
+            <p>-�꽭釉먯씪�젅釉� �렪�쓽�젏</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �엳�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.83773521864724 , 127.18405725536161)
+    },
+    {
+        content: `<div style= "width:250px">
+        <b>議고삎愿�</b>
+        </div> 
+        <p>-CU �렪�쓽�젏</p>
+        <p>-蹂듭궗�젏</p>
+        <p>-酉곕━移댄럹 議고삎愿��젏</p>
+        <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �엳�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.840873091070456 , 127.18851559956927)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>泥댁쑁愿�</b>
+            </div> 
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �엳�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.84131647400566 , 127.18735072201022)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>諛깆꽍�깮�솢愿�</b>
+            </div> 
+            <p>-�쐶�듃�땲�뒪 �꽱�꽣</p>
+            <p>-湲곕뀗�뭹�젏</p>
+            <p>-�떦援ъ옣</p>
+            <p>-�떇�떦</p>
+            <p>-�씠�뵒�빞而ㅽ뵾</p>
+            <p>-GS25 �렪�쓽�젏</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �엳�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.84246422835901 , 127.18521214868666)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>紐⑹뼇愿�</b>
+            </div> 
+            <p>-蹂듭궗�젏</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �뾾�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.840862701990915 , 127.18363872637468)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>蹂듭�愿�</b>
+            </div> 
+            <p>-�떇�떦(諛�寃⑥슱)</p>
+            <p>-�궗吏꾧�</p>
+            <p>-�꽭釉먯씪�젅釉� �렪�쓽�젏</p>
+            <p>-蹂듭궗�젏</p>
+            <p>-�넻�븰踰꾩뒪 �듅李④텒 �뙋留ㅺ린</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �뾾�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.840576092973514 , 127.18250571971859)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>諛깆꽍��</b></div> 
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �뾾�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.840576092973514 , 127.18250571971859)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>�씤�꽦愿�</b>
+            </div> 
+            <p>利앸챸�꽌 諛쒓툒 臾댁씤湲곌린</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �뾾�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng( 36.83940077642276, 127.1835623600196)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>踰좊뜲�뒪�떎 怨듭썝</b>
+            </div>
+            <p>-酉곕━移댄럹 遺꾩닔���젏</p>`, 
+        latlng: new kakao.maps.LatLng(36.84010999160991, 127.1838247115266)
+    },
+    {
+        content: `<div style= "width:250px">
+            <b>�쇅�떇�궛�뾽愿�</b>
+            </div>
+            <p>-�븞怨⑥떇�떦</p>
+            <p>-留뚮굹踰좎씠而ㅻ━</p>
+            <b>�씠 嫄대Ъ�� �뿕由щ쿋�씠�꽣媛� �뾾�뒿�땲�떎.<b/>`, 
+        latlng: new kakao.maps.LatLng(36.83749016273122 , 127.18518894403994)
+    }
+];
+
+for (var i = 0; i < positions.length; i++) {
+    // 留덉빱瑜� �깮�꽦�빀�땲�떎
+    var marker = new kakao.maps.Marker({
+        map: map, // 留덉빱瑜� �몴�떆�븷 吏��룄
+        position: positions[i].latlng // 留덉빱�쓽 �쐞移�
+    });
+
+    // 留덉빱�뿉 �몴�떆�븷 �씤�룷�쐢�룄�슦瑜� �깮�꽦�빀�땲�떎 
+    var infowindow = new kakao.maps.InfoWindow({
+        content: positions[i].content // �씤�룷�쐢�룄�슦�뿉 �몴�떆�븷 �궡�슜
+    });
+
+    // 留덉빱�뿉 �겢由� �씠踰ㅽ듃瑜� �벑濡앺빀�땲�떎
+    kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
+}
+
+// �씤�룷�쐢�룄�슦瑜� �뿴怨� �떕�뒗 �겢濡쒖�瑜� 留뚮뱶�뒗 �븿�닔�엯�땲�떎 
+function makeClickListener(map, marker, infowindow) {
+    var isOpen = false; // �씤�룷�쐢�룄�슦 �긽�깭瑜� 愿�由ы븯�뒗 蹂��닔
+
+    return function() {
+        if (isOpen) {
+            infowindow.close(); // �씤�룷�쐢�룄�슦媛� �뿴�젮�엳�쑝硫� �떕�뒿�땲�떎
+        } else {
+            infowindow.open(map, marker); // �씤�룷�쐢�룄�슦媛� �떕���엳�쑝硫� �뿽�땲�떎
+        }
+        isOpen = !isOpen; // �긽�깭瑜� 諛섏쟾�떆�궢�땲�떎
+    };
+}
+
+// 吏��룄 �젅踰⑥쓣 �몴�떆�빀�땲�떎
+displayLevel();
+ 
+// 吏��룄 �젅踰⑥� 吏��룄�쓽 �솗�� �닔以��쓣 �쓽誘명빀�땲�떎
+// 吏��룄 �젅踰⑥� 1遺��꽣 14�젅踰⑥씠 �엳�쑝硫� �닽�옄媛� �옉�쓣�닔濡� 吏��룄 �솗�� �닔以��씠 �넂�뒿�땲�떎
+function zoomIn() {        
+    // �쁽�옱 吏��룄�쓽 �젅踰⑥쓣 �뼸�뼱�샃�땲�떎
+    var level = map.getLevel();
+    
+    // 吏��룄瑜� 1�젅踰� �궡由쎈땲�떎 (吏��룄媛� �솗���맗�땲�떎)
+    map.setLevel(level - 1);
+    
+    // 吏��룄 �젅踰⑥쓣 �몴�떆�빀�땲�떎
+    displayLevel();
+}    
+
+function zoomOut() {    
+    // �쁽�옱 吏��룄�쓽 �젅踰⑥쓣 �뼸�뼱�샃�땲�떎
+    var level = map.getLevel(); 
+    
+    // 吏��룄瑜� 1�젅踰� �삱由쎈땲�떎 (吏��룄媛� 異뺤냼�맗�땲�떎)
+    map.setLevel(level + 1);
+    
+    // 吏��룄 �젅踰⑥쓣 �몴�떆�빀�땲�떎
+    displayLevel(); 
+}    
+ 
+function displayLevel(){
+    var levelEl = document.getElementById('maplevel');
+    levelEl.innerHTML = '�쁽�옱 吏��룄 �젅踰⑥� ' + map.getLevel() + ' �젅踰� �엯�땲�떎.';
+}
+
+var drawingFlag = false; // �꽑�씠 洹몃젮吏�怨� �엳�뒗 �긽�깭瑜� 媛�吏�怨� �엳�쓣 蹂��닔�엯�땲�떎
+var moveLine; // �꽑�씠 洹몃젮吏�怨� �엳�쓣�븣 留덉슦�뒪 ��吏곸엫�뿉 �뵲�씪 洹몃젮吏� �꽑 媛앹껜 �엯�땲�떎
+var clickLine // 留덉슦�뒪濡� �겢由��븳 醫뚰몴濡� 洹몃젮吏� �꽑 媛앹껜�엯�땲�떎
+var distanceOverlay; // �꽑�쓽 嫄곕━�젙蹂대�� �몴�떆�븷 而ㅼ뒪���삤踰꾨젅�씠 �엯�땲�떎
+var dots = {}; // �꽑�씠 洹몃젮吏�怨� �엳�쓣�븣 �겢由��븷 �븣留덈떎 �겢由� 吏��젏怨� 嫄곕━瑜� �몴�떆�븯�뒗 而ㅼ뒪�� �삤踰꾨젅�씠 諛곗뿴�엯�땲�떎.
+
+    
+</script>

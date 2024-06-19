@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>건물 정보</title>
+  <link rel="stylesheet" href="css/detail_style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <div class="logo">
+      <img src="images/bulogo.png" alt="백석대학교 로고">
+    </div>
+    <ul class="nav-menu">
+      <div class="category-form">
+        <form action="#" method="get">
+          <select name="category" id="category-arc">
+            <option value="all">건물 세부정보</option>
+            <option value="main-building">본부동</option>
+            <option value="truth-hall">진리관</option>
+            <option value="arts-building">예술동</option>
+            <option value="music-hall">음악관</option>
+            <option value="faculty-hall">교수회관</option>
+            <option value="wisdom-hall">지혜관</option>
+            <option value="library">도서관</option>
+            <option value="sculpture-hall">조형관</option>
+            <option value="gym">체육관</option>
+            <option value="dormitory">백석생활관</option>
+            <option value="pastoral-hall">목양관</option>
+            <option value="welfare-hall">복지관</option>
+            <option value="baekseok-hall">백석홀</option>
+            <option value="food-industry-hall">외식산업관</option>
+          </select>
+          <button type="submit">이동</button>
+        </form>
+      </div>
+    </ul>
+  </nav>
+</header>
+
+
+  <main>
+    <section class="info-sections">
+      <h2>층별 정보</h2>
+      <div class="category-form">
+        <form>
+          <select name="category" id="category-select">
+            <option value="allfloor">층별정보 안내</option>
+            <option value="floor-1">1층</option>
+            <option value="floor-2">2층</option>
+            <!-- 다른 층 옵션 -->
+          </select>
+          <button type="button" id="show-info">정보 보기</button>
+        </form>
+      </div>
+      <div class="floor-info">
+        <div class="floor" id="floor-1" style="display: none;">
+          <h3>1층</h3>
+          <li>도서관</li>
+          <li>카페(영업 잠정중단)</li>
+        </div>
+        <div class="floor" id="floor-2" style="display: none;">
+          <h3>2층</h3>
+          <li>회의실</li>
+          <li>사무실</li>
+        </div>
+        <!-- 다른 층 정보 추가 -->
+      </div>
+    </section>
+
+    
+    <section class="info-sections">
+      <h2>편의시설</h2>
+      <ul class="amenities">
+        <li>
+          <img src="images/library.jpg" alt="도서관">
+          <h3>도서관</h3>
+          <p>도서관은 지하1층에 위치하고 있습니다.</p>
+        </li>
+        <li>
+          <img src="images/cu.jpg" alt="편의점">
+          <h3>편의점</h3>
+          <p>편의점은 6층에 위치하고 있습니다.</p>
+        </li>
+        <!-- 다른 편의시설 추가 -->
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 캡스톤디자인 백석 셰르파 팀</p>
+  </footer>
+
+
+  <script src="java/Floorinfo.js"></script>
+</body>
+
+
+</html>

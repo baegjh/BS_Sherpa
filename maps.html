@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>카카오 지도 테스트</title>
+</head>
+<body>
+    <div id="map" style="width:500px; height:400px;"></div>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d7ce2b901ed6c206df168689da3537e1"></script>
+    <script> 
+    const container = document.getElementById("map") ;
+    const x = 36.83928220573199 ;
+    const y = 127.1859038216635 ;
+    let options = {
+        center: new kakao.maps.LatLng(x, y),
+        level: 3
+    };
+    let map = new kakao.maps.Map(container, options) ; // 지도 생성 및 객체 리턴
+    </script>
+</body>
+</html>
